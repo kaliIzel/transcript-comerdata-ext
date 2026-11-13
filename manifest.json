@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Transcript · Comerdata",
+  "version": "0.5.4",
+  "minimum_chrome_version": "140",
+  "description": "Transcribe lecciones de Comerdata y reúne el texto de cada curso en tu PC.",
+  "permissions": ["downloads", "storage"],
+  "host_permissions": ["https://academia.comerdata.com/*", "http://127.0.0.1/*"],
+  "content_scripts": [{
+    "matches": ["https://academia.comerdata.com/*"],
+    "js": ["academy.js"],
+    "run_at": "document_start"
+  }, {
+    "matches": ["https://iframe.mediadelivery.net/*"],
+    "all_frames": true,
+    "js": ["vendor/mux-mp4.min.js", "audio.js", "hls.js", "player.js"]
+  }],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_title": "Mostrar Transcript en el reproductor" }
+}
